@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://u8lqqkmdcjav"]
+
+[ext_resource type="PackedScene" uid="uid://b1i461rv5mt7o" path="res://player/player.tscn" id="1_kfocn"]
+[ext_resource type="TileSet" uid="uid://cbj8f6bxp4bbc" path="res://terrain/industrialv2_set.tres" id="2_ocowo"]
+
+[node name="test" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_kfocn")]
+position = Vector2(320, 312)
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(2, 2)
+tile_set = ExtResource("2_ocowo")
+format = 2
+layer_0/tile_data = PackedInt32Array(1048580, 917505, 0, 1048581, 917505, 0, 1048582, 917505, 0, 1048583, 917505, 0, 1048584, 917505, 0, 1048585, 917505, 0, 1048586, 917505, 0, 1048587, 917505, 0, 1048588, 917505, 0, 1048589, 917505, 0, 1048590, 917505, 0, 1048591, 917505, 0, 1048592, 917505, 0, 1114128, 917505, 0, 1114127, 917505, 0, 1114126, 917505, 0, 1114125, 917505, 0, 1114124, 917505, 0, 1114123, 917505, 0, 1114122, 917505, 0, 1114121, 917505, 0, 1114120, 917505, 0, 1114119, 917505, 0, 1114118, 917505, 0, 1114117, 917505, 0, 1114116, 917505, 0)
