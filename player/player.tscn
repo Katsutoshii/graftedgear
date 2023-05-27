@@ -5,6 +5,7 @@
 [node name="Player" type="Node2D"]
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
+mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_o7tb4")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
