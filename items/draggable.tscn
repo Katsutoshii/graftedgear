@@ -5,12 +5,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1rcp5"]
 size = Vector2(30, 30)
 
-[node name="RigidBody2D" type="RigidBody2D"]
-position = Vector2(448, 320)
+[node name="Draggable" type="RigidBody2D"]
 input_pickable = true
 script = ExtResource("1_0x7b6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_1rcp5")
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]

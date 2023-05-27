@@ -39,11 +39,18 @@ func _physics_process(delta):
 		apply_central_force(-drag * linear_velocity)
 
 
-func _input(event):
-	if selected and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		on_deselect()
+# func _input(event):
+# 	if selected and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+# 		on_deselect()
+
+# func _on_input_event(_viewport, _event, _shape_idx):
+# 	if not selected and Input.is_action_just_pressed("click"):
+# 		on_select()
 
 
-func _on_input_event(_viewport, _event, _shape_idx):
-	if not selected and Input.is_action_just_pressed("click"):
-		on_select()
+func _on_body_entered(body: Node):
+	print("_on_body_entered: ", body.name)
+
+
+func _on_body_exited(body: Node):
+	print("_on_body_exited: ", body.name)
