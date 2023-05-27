@@ -19,6 +19,7 @@ mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_o7tb4")
 
 [node name="Arm" parent="." instance=ExtResource("1_ys2gy")]
+scale = Vector2(1, 1)
 
 [node name="Player" type="Node2D" parent="."]
 
