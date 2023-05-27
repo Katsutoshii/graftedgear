@@ -1,16 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1i461rv5mt7o"]
+[gd_scene load_steps=6 format=3 uid="uid://b1i461rv5mt7o"]
+
+[ext_resource type="PackedScene" uid="uid://dinsln64y6yu0" path="res://player/arm.tscn" id="1_ys2gy"]
+[ext_resource type="Texture2D" uid="uid://b13u7fifnct77" path="res://terrain/industrial.v2.png" id="2_7chj0"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o7tb4"]
 
-[node name="Player" type="Node2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5xmf"]
+atlas = ExtResource("2_7chj0")
+region = Rect2(80, 208, 32, 32)
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rnb17"]
+size = Vector2(128, 128)
+
+[node name="RigidBody2D" type="RigidBody2D"]
+texture_filter = 1
+texture_repeat = 2
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_o7tb4")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
-polygon = PackedVector2Array(64, -24, 24, -64, -24, -64, -64, -24, -64, 24, -24, 64, 24, 64, 64, 24)
+[node name="Arm" parent="." instance=ExtResource("1_ys2gy")]
 
-[node name="Polygon2D" type="Polygon2D" parent="RigidBody2D"]
-color = Color(0.768627, 0.768627, 0.768627, 1)
-polygon = PackedVector2Array(64, -24, 24, -64, -24, -64, -64, -24, -64, 24, -24, 64, 24, 64, 64, 24)
+[node name="Player" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_u5xmf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rnb17")
