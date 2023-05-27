@@ -1,16 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbjpcqc6nalbd"]
+[gd_scene load_steps=5 format=3 uid="uid://cbjpcqc6nalbd"]
 
 [ext_resource type="Script" path="res://items/draggable.gd" id="1_0x7b6"]
+[ext_resource type="Texture2D" uid="uid://b13u7fifnct77" path="res://terrain/industrial.v2.png" id="2_wh28p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1rcp5"]
-size = Vector2(30, 30)
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qowbe"]
+atlas = ExtResource("2_wh28p")
+region = Rect2(192, 0, 16, 16)
 
 [node name="Draggable" type="RigidBody2D"]
+texture_filter = 1
 input_pickable = true
 script = ExtResource("1_0x7b6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_1rcp5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_qowbe")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dinsln64y6yu0"]
 
 [ext_resource type="Texture2D" uid="uid://b13u7fifnct77" path="res://terrain/industrial.v2.png" id="1_iogs4"]
-[ext_resource type="PackedScene" uid="uid://cnqmv5c8ln7kl" path="res://player/target.tscn" id="2_3qhue"]
+[ext_resource type="PackedScene" uid="uid://cnqmv5c8ln7kl" path="res://player/claw.tscn" id="2_3qhue"]
 [ext_resource type="Script" path="res://player/follow_pointer.gd" id="2_dbjun"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bhipe"]
@@ -61,6 +61,7 @@ rest = Transform2D(1, 0, 0, 1, 0, 0)
 auto_calculate_length_and_angle = false
 length = 64.0
 bone_angle = 0.0
+metadata/_local_pose_override_enabled_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Skeleton2D/Joint0"]
 position = Vector2(32, 0)
@@ -72,6 +73,7 @@ rest = Transform2D(1, 0, 0, 1, 64, 0)
 auto_calculate_length_and_angle = false
 length = 64.0
 bone_angle = 0.0
+metadata/_local_pose_override_enabled_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Skeleton2D/Joint0/Joint1"]
 position = Vector2(32, 0)
@@ -83,6 +85,7 @@ rest = Transform2D(1, 0, 0, 1, 64, 0)
 auto_calculate_length_and_angle = false
 length = 64.0
 bone_angle = 0.0
+metadata/_local_pose_override_enabled_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Skeleton2D/Joint0/Joint1/Joint2"]
 position = Vector2(32, 0)
@@ -94,6 +97,7 @@ rest = Transform2D(1, 0, 0, 1, 64, 0)
 auto_calculate_length_and_angle = false
 length = 16.0
 bone_angle = 0.0
+metadata/_local_pose_override_enabled_ = true
 
 [node name="Top" type="Sprite2D" parent="Skeleton2D/Joint0/Joint1/Joint2/Claw"]
 position = Vector2(8.00002, 0)

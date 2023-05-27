@@ -10,7 +10,7 @@ atlas = ExtResource("2_7chj0")
 region = Rect2(80, 208, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rnb17"]
-size = Vector2(128, 128)
+size = Vector2(64, 64)
 
 [node name="RigidBody2D" type="RigidBody2D"]
 texture_filter = 1
