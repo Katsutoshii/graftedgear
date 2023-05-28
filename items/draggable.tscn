@@ -10,17 +10,18 @@ size = Vector2(16, 16)
 atlas = ExtResource("2_wh28p")
 region = Rect2(192, 0, 16, 16)
 
-[node name="Draggable" type="RigidBody2D"]
+[node name="Draggable" type="RigidBody2D" groups=["Draggable"]]
 texture_filter = 1
+collision_layer = 2
+collision_mask = 7
 input_pickable = true
 script = ExtResource("1_0x7b6")
+follow_speed = 3000.0
+max_squared_distance = 1000.0
+drag = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_1rcp5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_qowbe")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]
-[connection signal="input_event" from="." to="." method="_on_input_event"]

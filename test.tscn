@@ -7,10 +7,10 @@
 [node name="test" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_kfocn")]
-position = Vector2(160, 200)
-mass = 20.0
+position = Vector2(160, 224)
+mass = 15.0
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="." groups=["Ground"]]
 texture_filter = 1
 scale = Vector2(2, 2)
 tile_set = ExtResource("2_ocowo")
@@ -18,7 +18,21 @@ format = 2
 layer_0/tile_data = PackedInt32Array(524289, 1245185, 0, 524290, 1245185, 0, 524291, 1245185, 0, 524292, 1245185, 0, 524293, 1245185, 0, 524294, 1245185, 0, 524295, 1245185, 0, 524296, 1245185, 0, 524297, 1245185, 0, 524298, 1245185, 0, 524299, 1245185, 0, 524300, 1245185, 0, 524301, 1245185, 0, 524302, 1245185, 0, 524303, 1245185, 0)
 
 [node name="Draggable" parent="." instance=ExtResource("3_30jli")]
-position = Vector2(408, 232)
+position = Vector2(344, 248)
+mass = 5.0
+follow_speed = 5000.0
+max_squared_distance = 500.0
+
+[node name="HeavyDraggable" parent="." instance=ExtResource("3_30jli")]
+position = Vector2(296, 240)
 mass = 10.0
-max_squared_distance = 1000.0
-drag = 150.0
+follow_speed = 5000.0
+max_squared_distance = 500.0
+
+[node name="CollisionShape2D" parent="HeavyDraggable" index="0"]
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" parent="HeavyDraggable" index="1"]
+scale = Vector2(2, 2)
+
+[editable path="HeavyDraggable"]

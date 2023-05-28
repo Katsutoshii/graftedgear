@@ -12,16 +12,14 @@ region = Rect2(80, 208, 32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rnb17"]
 size = Vector2(64, 64)
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="Player" type="RigidBody2D"]
 texture_filter = 1
 texture_repeat = 2
-mass = 10.0
+mass = 2.0
 physics_material_override = SubResource("PhysicsMaterial_o7tb4")
 
-[node name="Arm" parent="." instance=ExtResource("1_ys2gy")]
-scale = Vector2(1, 1)
-
-[node name="Player" type="Node2D" parent="."]
+[node name="Arm" parent="." node_paths=PackedStringArray("base") instance=ExtResource("1_ys2gy")]
+base = NodePath("..")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)

@@ -1,10 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://dinsln64y6yu0"]
 
+[ext_resource type="Script" path="res://player/arm.gd" id="1_0qxui"]
 [ext_resource type="Texture2D" uid="uid://b13u7fifnct77" path="res://terrain/industrial.v2.png" id="1_iogs4"]
 [ext_resource type="PackedScene" uid="uid://cnqmv5c8ln7kl" path="res://player/claw.tscn" id="2_3qhue"]
-[ext_resource type="Script" path="res://player/follow_pointer.gd" id="2_dbjun"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_bhipe"]
+[ext_resource type="PackedScene" uid="uid://dus6ipyxedstm" path="res://player/pointer.tscn" id="2_bjx3m"]
 
 [sub_resource type="SkeletonModification2DFABRIK" id="SkeletonModification2DFABRIK_gmbdw"]
 target_nodepath = NodePath("../Claw")
@@ -35,23 +34,20 @@ margin = Rect2(0, 3, 0, 0)
 [node name="Arm" type="Node2D"]
 texture_filter = 1
 texture_repeat = 2
-scale = Vector2(2, 2)
+script = ExtResource("1_0qxui")
 
-[node name="Claw" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_3qhue")]
+[node name="Claw" parent="." node_paths=PackedStringArray("arm", "target") instance=ExtResource("2_3qhue")]
 position = Vector2(192, 0)
+arm = NodePath("..")
+drag_speed = 3000.0
+max_squared_distance = 300.0
 target = NodePath("../Pointer")
 
-[node name="Pointer" type="Node2D" parent="." node_paths=PackedStringArray("origin")]
-position = Vector2(196, -12)
-script = ExtResource("2_dbjun")
+[node name="Pointer" parent="." node_paths=PackedStringArray("origin") instance=ExtResource("2_bjx3m")]
+position = Vector2(192, 0)
+follow_speed = 20.0
 origin = NodePath("..")
-
-[node name="Area2D" type="Area2D" parent="Pointer"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pointer/Area2D"]
-position = Vector2(-4, 12)
-shape = SubResource("CircleShape2D_bhipe")
-debug_color = Color(0, 0.627451, 0.501961, 0.419608)
+radius = 192.0
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
 modification_stack = SubResource("SkeletonModificationStack2D_2phuq")
@@ -59,33 +55,30 @@ modification_stack = SubResource("SkeletonModificationStack2D_2phuq")
 [node name="Joint0" type="Bone2D" parent="Skeleton2D"]
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 auto_calculate_length_and_angle = false
-length = 64.0
+length = 60.0
 bone_angle = 0.0
-metadata/_local_pose_override_enabled_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Skeleton2D/Joint0"]
 position = Vector2(32, 0)
 texture = SubResource("AtlasTexture_8uqyf")
 
 [node name="Joint1" type="Bone2D" parent="Skeleton2D/Joint0"]
-position = Vector2(64, 0)
+position = Vector2(60, 0)
 rest = Transform2D(1, 0, 0, 1, 64, 0)
 auto_calculate_length_and_angle = false
-length = 64.0
+length = 60.0
 bone_angle = 0.0
-metadata/_local_pose_override_enabled_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Skeleton2D/Joint0/Joint1"]
 position = Vector2(32, 0)
 texture = SubResource("AtlasTexture_8uqyf")
 
 [node name="Joint2" type="Bone2D" parent="Skeleton2D/Joint0/Joint1"]
-position = Vector2(64, 0)
+position = Vector2(60, 0)
 rest = Transform2D(1, 0, 0, 1, 64, 0)
 auto_calculate_length_and_angle = false
-length = 64.0
+length = 60.0
 bone_angle = 0.0
-metadata/_local_pose_override_enabled_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Skeleton2D/Joint0/Joint1/Joint2"]
 position = Vector2(32, 0)
@@ -97,7 +90,6 @@ rest = Transform2D(1, 0, 0, 1, 64, 0)
 auto_calculate_length_and_angle = false
 length = 16.0
 bone_angle = 0.0
-metadata/_local_pose_override_enabled_ = true
 
 [node name="Top" type="Sprite2D" parent="Skeleton2D/Joint0/Joint1/Joint2/Claw"]
 position = Vector2(8.00002, 0)

@@ -1,16 +1,11 @@
-extends Node2D
+extends Area2D
 
 # How quicky to follow to pointer.
 @export var follow_speed: float = 10.
 
 @export var origin: Node2D
-@export var radius: float = 64 * 3 + 16
+@export var radius: float = 60 * 3 + 16
 var radius_squared: float = radius * radius
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass  # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
