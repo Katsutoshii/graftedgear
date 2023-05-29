@@ -1,3 +1,2 @@
-class_name InputActions
-
-const Click = "click"
+class_name InputAction
+enum { click }

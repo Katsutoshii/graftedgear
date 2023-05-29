@@ -36,12 +36,10 @@ texture_filter = 1
 texture_repeat = 2
 script = ExtResource("1_0qxui")
 
-[node name="Claw" parent="." node_paths=PackedStringArray("arm", "target") instance=ExtResource("2_3qhue")]
+[node name="Claw" parent="." instance=ExtResource("2_3qhue")]
 position = Vector2(192, 0)
-arm = NodePath("..")
 drag_speed = 3000.0
 max_squared_distance = 300.0
-target = NodePath("../Pointer")
 
 [node name="Pointer" parent="." node_paths=PackedStringArray("origin") instance=ExtResource("2_bjx3m")]
 position = Vector2(192, 0)

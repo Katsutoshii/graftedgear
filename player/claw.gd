@@ -14,9 +14,13 @@ extends RigidBody2D
 # Amount of drag to apply to the object.
 @export var drag: float = 10.
 @export var target: Node2D
-@export var pulling: bool
+
+# For pulling mechanics (pulling self across floor)
+@export var pull_start: Vector2
 @export var max_pulling_y_force: float = 800
 @export var min_pulling_y_force: float = 200
+
+var collisions: Collisions = Collisions.new()
 
 
 # Called when the node enters the scene tree for the first time.
@@ -30,6 +34,8 @@ func on_close():
 	$CollisionShape2D.debug_color = Color(1, 0, 0, 0.5)
 	if self.draggable != null:
 		self.draggable.set_claw(self)
+	if self.collisions.has(ObjectGroup.Ground):
+		self.pull_start = self.get_global_mouse_position()
 
 
 func on_open():
@@ -41,17 +47,18 @@ func on_open():
 
 
 func _physics_process(delta):
-	var direction: Vector2 = target.global_position - self.global_position
-	var magnitude: float = clamp(direction.length_squared(), 0, self.max_squared_distance)
-	if self.pulling and !self.is_open:
-		# direction.y = clamp(direction.y, -800 * delta, -200 * delta)
+	if self.collisions.has(ObjectGroup.Ground) and !self.is_open:
+		var direction: Vector2 = pull_start - self.get_global_mouse_position()
+		var magnitude: float = clamp(direction.length_squared(), 0, self.max_squared_distance)
 		self.arm.base.apply_central_force(
 			delta * drag_speed * magnitude * (-direction.normalized() + 0.3 * Vector2.UP)
 		)
-		self.arm.base.apply_central_force(-drag * linear_velocity)
 	else:
+		var direction: Vector2 = target.global_position - self.global_position
+		var magnitude: float = clamp(direction.length_squared(), 0, self.max_squared_distance)
 		self.apply_central_force(delta * follow_speed * (direction.normalized() * magnitude))
-		self.apply_central_force(-drag * linear_velocity)
+
+	self.apply_central_force(-drag * self.linear_velocity)
 
 
 func _input(event: InputEvent):
@@ -64,18 +71,14 @@ func _input(event: InputEvent):
 
 func _on_area_2d_body_entered(body: Node2D):
 	print("_on_area_2d_body_entered: ", body.name)
-	if !self.is_open:
-		return
-	if body.is_in_group(Groups.Draggable):
+	self.collisions.add(body)
+	if ObjectGroup.check(body, ObjectGroup.Draggable):
 		self.draggable = body as Draggable
-	elif body.is_in_group(Groups.Ground):
-		self.pulling = true
 
 
 func _on_area_2d_body_exited(body: Node2D):
 	print("_on_area_2d_body_exited: ", body.name)
-	if body.is_in_group(Groups.Draggable) and self.draggable != null:
-		self.draggable.release_claw()
-		self.draggable = null
-	elif body.is_in_group(Groups.Ground):
-		self.pulling = false
+	self.collisions.remove(body)
+	# if ObjectGroup.check(body, ObjectGroup.Draggable) and self.draggable != null:
+	# 	self.draggable.release_claw()
+	# 	self.draggable = null
